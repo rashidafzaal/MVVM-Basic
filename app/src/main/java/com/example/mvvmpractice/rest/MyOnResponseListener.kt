@@ -1,4 +1,4 @@
-package com.example.mvvmpractice
+package com.example.mvvmpractice.rest
 
 interface MyOnResponseListener<T> {
 

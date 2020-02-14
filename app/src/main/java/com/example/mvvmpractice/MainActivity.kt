@@ -1,9 +1,12 @@
 package com.example.mvvmpractice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import com.example.mvvmpractice.rest.MyOnResponseListener
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,14 +17,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        callLogin()
+//        callLogin()
+
+        observerBtn.setOnClickListener {
+            val intent = Intent(this@MainActivity, SecondActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun callLogin() {
         mainViewModel.login(myListener)
     }
 
-    val myListener = object: MyOnResponseListener<String>{
+    val myListener = object: MyOnResponseListener<String> {
         override fun onError(status: Boolean) {
             Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_SHORT).show()
         }
