@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.fragment_top.*
 import kotlinx.android.synthetic.main.fragment_top.view.*
 
 /**
@@ -33,20 +35,8 @@ class TopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rootview.enterNumberEditText.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                mainViewModel.setInputNumber(s.toString())
-                if (s.isNullOrEmpty()) {
-                    mainViewModel.setInputNumber("")
-                }
-            }
-
+        mainViewModel.getInput().observe(this, Observer {
+            topFragTextView.setText(it)
         })
 
     }

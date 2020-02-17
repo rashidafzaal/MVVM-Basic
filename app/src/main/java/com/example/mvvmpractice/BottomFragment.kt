@@ -32,7 +32,7 @@ class BottomFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainViewModel.getInputNumber().observe(this, Observer {
+        mainViewModel.getInput().observe(this, Observer {
             if (it.isNotEmpty()) {
                 var str = it
                 var newString = "I am Rashid " + str

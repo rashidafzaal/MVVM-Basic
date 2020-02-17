@@ -19,11 +19,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         myRepo.login(myListener)
     }
 
-    fun getInputNumber(): MutableLiveData<String> {
+    fun getInput(): MutableLiveData<String> {
         return inputNumber
     }
 
-    fun setInputNumber(input: String) {
+    fun setInput(input: String) {
          inputNumber.value = input
     }
 
