@@ -22,24 +22,20 @@ class BottomFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_bottom, container, false)
-        mainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
 
+        mainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Observer
         mainViewModel.getInput().observe(this, Observer {
-            if (it.isNotEmpty()) {
-                var str = it
-                var newString = "I am Rashid " + str
-                appendedTextView.setText("Appended Result = " + newString)
-            } else {
-                appendedTextView.setText("Appended Result = ")
-            }
+            bottomTextView.text = it
+            if (it.isEmpty())
+                bottomTextView.text = "- - -"
         })
 
     }

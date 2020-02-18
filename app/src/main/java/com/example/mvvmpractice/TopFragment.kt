@@ -25,7 +25,6 @@ class TopFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         rootview = inflater.inflate(R.layout.fragment_top, container, false)
 
         mainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
@@ -35,8 +34,11 @@ class TopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Observer
         mainViewModel.getInput().observe(this, Observer {
-            topFragTextView.setText(it)
+            topFragTextView.text = it
+            if (it.isEmpty())
+                topFragTextView.text = "- - -"
         })
 
     }

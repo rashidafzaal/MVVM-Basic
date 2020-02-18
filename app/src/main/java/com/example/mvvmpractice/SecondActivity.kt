@@ -16,7 +16,6 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         supportFragmentManager.beginTransaction().add(R.id.topFrameLayout, TopFragment()).commit()
@@ -31,17 +30,14 @@ class SecondActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 mainViewModel.setInput(s.toString())
-                if (s.isNullOrEmpty()) {
-                    mainViewModel.setInput("")
-                }
             }
-
         })
 
+        // Observer
         mainViewModel.getInput().observe(this, Observer {
-            enteredValue.setText(it)
+            enteredValue.text = it
             if (it.isEmpty()) {
-                enteredValue.setText("- - -")
+                enteredValue.text = "- - -"
             }
         })
 
